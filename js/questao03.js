@@ -1,14 +1,19 @@
-function verificar() {
-   
-    var num = document.getElementById("numero").value;
-    
-    num = parseInt(num);
+document.getElementById("formProduto").addEventListener("submit", function(event) {
+    event.preventDefault(); 
+    var nome = document.getElementById("nome").value;
+    var valorCompra = parseFloat(document.getElementById("valor").value);
+    var valorVenda;
 
-    if (num % 3 === 0 && num % 7 === 0) {
-        document.getElementById("resultado").innerHTML = 
-            "O número " + num + " é divisível por 3 e por 7.";
+    if (valorCompra < 10) {
+        valorVenda = valorCompra * 1.70; 
+    } else if (valorCompra >= 10 && valorCompra <= 30) {
+        valorVenda = valorCompra * 1.50; 
+    } else if (valorCompra > 30 && valorCompra <= 50) {
+        valorVenda = valorCompra * 1.40; 
     } else {
-        document.getElementById("resultado").innerHTML = 
-            "O número " + num + " NÃO é divisível por 3 e por 7.";
+        valorVenda = valorCompra * 1.30; 
     }
-}
+
+    document.getElementById("resultado").innerHTML =
+        "Produto: " + nome + "<br>Valor de venda: R$ " + valorVenda.toFixed(2);
+});
